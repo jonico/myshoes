@@ -181,6 +181,7 @@ func (s *Starter) bung(ctx context.Context, jobUUID uuid.UUID, target datastore.
 		return "", "", "", fmt.Errorf("failed to get setup scripts: %w", err)
 	}
 
+	logger.Logf(false, "execute shoes-provider AddInstance (job: %s)", jobUUID)
 	runnerName := runner.ToName(jobUUID.String())
 	cloudID, ipAddress, shoesType, err := client.AddInstance(ctx, runnerName, script, target.ResourceType)
 	if err != nil {
